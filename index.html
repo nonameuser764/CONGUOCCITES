@@ -16,7 +16,28 @@
             --glass: rgba(255, 255, 255, 0.95);
             --glow-gold: 0 0 15px rgba(255, 183, 3, 0.8), 0 0 30px rgba(255, 183, 3, 0.4);
         }
-        /* Hiệu ứng Fade-in toàn trang khi Reload */
+        /* --- LOGO BO TRÒN & CĂN CHỈNH --- */
+        
+        .header-logo {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 50%;
+            z-index: 10;
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.4));
+        }
+        
+        @media (min-width: 768px) {
+            .header-logo {
+                width: 80px;
+                height: 80px;
+                top: 20px;
+                left: 20px;
+            }
+        }
         
         @keyframes pageFadeIn {
             from {
@@ -42,9 +63,10 @@
             padding: 10px;
             color: #2d3436;
             line-height: 1.6;
+            /* FIX LỖI TRÀN MÀN HÌNH BÊN PHẢI */
             overflow-x: hidden;
+            width: 100vw;
             position: relative;
-            /* Áp dụng hiệu ứng reload */
             animation: pageFadeIn 1s ease-out forwards;
         }
         
@@ -106,7 +128,6 @@
             opacity: 0;
             pointer-events: none;
         }
-        /* Poster Container */
         
         .poster {
             max-width: 1100px;
@@ -117,6 +138,7 @@
             overflow: hidden;
             box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
             border: 1px solid rgba(255, 255, 255, 0.3);
+            width: 100%;
         }
         
         @media (min-width: 768px) {
@@ -158,7 +180,7 @@
         .glow-up-title {
             display: block;
             font-family: 'Montserrat', sans-serif;
-            font-size: clamp(1.8rem, 8vw, 4.5rem);
+            font-size: clamp(1.6rem, 7vw, 4.5rem);
             text-transform: uppercase;
             background: linear-gradient(to bottom, #fcf6ba 0%, #bf953f 25%, #fcf6ba 50%, #bf953f 75%, #fcf6ba 100%);
             -webkit-background-clip: text;
@@ -185,7 +207,6 @@
                 filter: drop-shadow(0 0 20px rgba(255, 183, 3, 0.8));
             }
         }
-        /* Grid nội dung */
         
         .content-grid {
             display: grid;
@@ -204,7 +225,40 @@
                 grid-column: span 2;
             }
         }
-        /* Card */
+        /* --- SỬA LỖI H2 TRÀN MÀN HÌNH & XÍCH TRÁI --- */
+        
+        h2 {
+            color: var(--forest);
+            font-size: clamp(0.95rem, 4vw, 1.2rem);
+            /* Tự động nhỏ lại trên đt */
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            white-space: nowrap;
+            /* Giữ 1 hàng */
+            overflow: hidden;
+            text-overflow: ellipsis;
+            /* Dài quá hiện dấu ... tránh tràn card */
+            margin-left: -12px;
+            /* Xích qua trái theo ý bạn */
+        }
+        
+        @media (min-width: 768px) {
+            h2 {
+                font-size: 1.4rem;
+                margin-left: 0;
+            }
+        }
+        
+        h2::before {
+            content: '';
+            width: 5px;
+            height: 22px;
+            background: var(--gold);
+            border-radius: 4px;
+            flex-shrink: 0;
+        }
         
         .card {
             background: white;
@@ -215,36 +269,13 @@
             opacity: 0;
             transform: translateY(30px);
             transition: opacity 0.8s ease, transform 0.8s ease;
-            word-wrap: break-word;
+            overflow: hidden;
+            /* Chặn tràn nội dung trong card */
         }
         
         .card.reveal {
             opacity: 1;
             transform: translateY(0);
-        }
-        
-        h2 {
-            color: var(--forest);
-            font-size: 1.2rem;
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        @media (min-width: 768px) {
-            h2 {
-                font-size: 1.4rem;
-            }
-        }
-        
-        h2::before {
-            content: '';
-            width: 6px;
-            height: 24px;
-            background: var(--gold);
-            border-radius: 4px;
-            flex-shrink: 0;
         }
         
         h3 {
@@ -287,7 +318,6 @@
             text-align: center;
             margin-top: 20px;
         }
-        /* Phụ lục grid */
         
         .appendix-grid {
             display: grid;
@@ -322,7 +352,6 @@
         .app-3 {
             background: #2a9d8f;
         }
-        /* Kết luận */
         
         .conclusion-zone {
             padding: 40px 15px;
@@ -373,6 +402,7 @@
 
     <div class="poster">
         <header>
+            <img src="https://i.ibb.co/pv3ws1hQ/image.jpg" alt="Logo" class="header-logo">
             <h1 class="glow-up-title">CÔNG ƯỚC CITES</h1>
             <p style="opacity: 0.95; font-size: 0.9rem; font-weight: 600; letter-spacing: 0.5px; margin-top: 15px; line-height: 1.6;">🌍 BẢO TỒN NGUỒN SỐNG THIÊN NHIÊN 🌍</p>
         </header>
@@ -402,7 +432,7 @@
 
             <section class="card full-width">
                 <h2>3. Lịch sử phát triển của CITES 🚀</h2>
-                <div style="display: grid; grid-template-columns: 1fr; gap: 20px;">
+                <div style="display: grid; grid-template-columns:1fr; gap: 20px;">
                     <style>
                         @media (min-width: 850px) {
                             .sub-grid-3 {
@@ -550,21 +580,15 @@
     </div>
 
     <script>
-        // Xử lý khi trang được load xong
         window.addEventListener('load', () => {
-            // Tắt Loader
             document.body.classList.add('loaded');
-
-            // Chạy hiệu ứng hiện các card khi scroll
             revealOnScroll();
         });
 
-        // Hàm Reveal on Scroll
         const revealElements = document.querySelectorAll('.card, .conclusion-zone');
         const revealOnScroll = () => {
             revealElements.forEach(el => {
                 const rect = el.getBoundingClientRect();
-                // Kích hoạt khi phần tử cách mép dưới màn hình một khoảng nhỏ
                 if (rect.top < window.innerHeight * 0.92) {
                     el.classList.add('reveal');
                 }
@@ -575,5 +599,3 @@
 </body>
 
 </html>
-
-
